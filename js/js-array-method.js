@@ -191,9 +191,8 @@ Array.prototype.mySlice = function() {
     }
 
     var fromIndex = +args[0] || 0;
-    fromIndex = (fromIndex + length) % length;
     if (fromIndex < 0) {
-        fromIndex = 0;
+        fromIndex += length;
     }
 
     var toIndex = args[1];
