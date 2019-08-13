@@ -1,5 +1,6 @@
 /**
  * 实现 JavaScript 中 String 的常用方法
+ * 实现这些方法的思路：先验证参数的边界情况，然后再实现对应的逻辑
  */
 
 String.prototype.myCharAt = function(index) {
@@ -110,3 +111,62 @@ String.prototype.myStartsWith = function(str, position) {
 
     return thisArg.slice(position, str.length) === str;
 }
+
+String.prototype.myPadStart = function(targetLength, padString) {
+    'use strict';
+    var thisArg = this;
+    if (thisArg == null) {
+        throw new TypeError('String.prototype.padStart called on null or undefined');
+    }
+    thisArg = String(thisArg);
+
+    var length = thisArg.length;
+
+    targetLength = +targetLength || 0;
+    if (targetLength < length) {
+        return thisArg;
+    }
+
+    padString = padString === undefined ? ' ' : String(padString);
+
+    var repeatNum = Math.ceil((targetLength - length) / padString.length);
+
+    for (var i = 0; i < repeatNum; i++) {
+        padString += padString;
+    }
+
+    padString = padString.slice(0, targetLength - length);
+
+    return padString + thisArg;
+}
+
+String.prototype.myPadEnd = function(targetLength, padString) {
+    'use strict';
+    var thisArg = this;
+    if (thisArg == null) {
+        throw new TypeError('String.prototype.padStart called on null or undefined');
+    }
+    thisArg = String(thisArg);
+
+    var length = thisArg.length;
+
+    targetLength = +targetLength || 0;
+    if (targetLength < length) {
+        return thisArg;
+    }
+
+    padString = padString === undefined ? ' ' : String(padString);
+
+    var repeatNum = Math.ceil((targetLength - length) / padString.length);
+
+    for (var i = 0; i < repeatNum; i++) {
+        padString += padString;
+    }
+
+    padString = padString.slice(0, targetLength - length);
+
+    return  thisArg + padString;
+}
+
+// 字符串匹配相关方法
+// match、search、matchAll、includes、indexOf、replace、split 等详见 data-structure-and-algorithm 目录字符串匹配与正则表达式
